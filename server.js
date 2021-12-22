@@ -69,6 +69,7 @@ app.post("/tasks",(req,res) => {
     })
 })
 
+
 app.delete("/tasks/:id",(req,res) => {
    console.log("35:",req.params.id)
 
@@ -84,12 +85,51 @@ app.delete("/tasks/:id",(req,res) => {
         }
     })
 })
+
+
+app.delete("/tasks",(req,res) => {
+   //console.log("35:",req.params.id)
+
+    Todo.deleteOne({isCompleted:true}, (err, deleteObj) =>{
+        if (err) {
+            console.log("ERROR: ",err)
+        } else {
+            deleteObj.deletedCount ===0
+            ? res.status(404).json("there is no completed todo found")
+            : res.json("Delete all completed todos successfully")
+            
+            
+        }
+    })
+})
+
+
 app.put("/tasks/:id",(req,res) => {
    //console.log("35:",req.params.id)
 
     Todo.updateOne(
         {_id: req.params.id},
         {title:req.body.newTitle},
+         (err, updateObj) =>{
+        if (err) {
+            console.log("ERROR: ",err)
+            res.status(400).json(err)
+        } else {
+            updateObj.modifiedCount ===1? 
+            res.json("Update one todo successfully")
+            :res.status(404).json("this todo is not found")
+            
+            
+        }
+    })
+})
+ 
+app.put("/tasks/:id/:isCompleted",(req,res) => {
+   //console.log("35:",req.params.id)
+
+    Todo.updateOne(
+        {_id: req.params.id},
+        {isCompleted:req.params.isCompleted},
          (err, updateObj) =>{
         if (err) {
             console.log("ERROR: ",err)
