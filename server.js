@@ -8,6 +8,8 @@ app.use(express.json()) //to read body
 
 app.get("/",(req,res) => {
     res.json(" GET / is working")
+
+    // CRUD: Creat , Read , Update , Deleted
 })
 app.get("/tasks",(req,res) => {
     Todo.find({}, (err, data) => {
@@ -19,6 +21,41 @@ app.get("/tasks",(req,res) => {
 
     })
 })
+     //filter?isCompleted=false
+                 //?key=value&key=value
+app.get("/filter",(req,res) => {
+    Todo.find({isCompleted: req.query.isCompleted}, (err, data) => {
+        if (err){
+            console.log("ERRor: ",  err )
+        }else{
+            res.json(data);
+        }
+
+    })
+})
+
+/*
+app.get("/completed",(req,res) => {
+    Todo.find({isCompleted: true}, (err, data) => {
+        if (err){
+            console.log("ERRor: ",  err )
+        }else{
+            res.json(data);
+        }
+
+    })
+})
+app.get("/not_completed",(req,res) => {
+    Todo.find({isCompleted: false}, (err, data) => {
+        if (err){
+            console.log("ERRor: ",  err )
+        }else{
+            res.json(data);
+        }
+
+    })
+})
+*/
 
 app.post("/tasks",(req,res) => {
    
