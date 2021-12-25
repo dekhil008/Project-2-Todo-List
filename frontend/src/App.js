@@ -45,6 +45,20 @@ export default function App() {
     });
   };
 
+  const toggleTodo = (id,newSatus) => {
+    axios
+    .put(`http://localhost:5000/tasks/${id}/${newSatus}`) 
+    .then((response) => {
+      // console.log('RESPONSE: ', response);
+      console.log("DATA: ", response.data);
+      // setTasks(response.data);
+      getData()
+      // change react hooks state using spread operator
+    })
+    .catch((err) => {
+      console.log("ERR: ", err);
+    });
+  };
   const deleteTodo = (id) => {
     axios
     .delete(`http://localhost:5000/tasks/${id}`) 
@@ -62,7 +76,8 @@ export default function App() {
 
 
   const mapOverTasks = tasks.map((taskObj, i) => (
-    <Todo key={i} task={taskObj} deleteTodo = {deleteTodo} />
+    <Todo key={i} task={taskObj} deleteTodo = {deleteTodo}
+    toggleTodo = {toggleTodo} />
   ));
   return (
     <div className='App'>

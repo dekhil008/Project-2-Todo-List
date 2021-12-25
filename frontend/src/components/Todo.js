@@ -5,7 +5,9 @@ export default function Todo(props) {
   return (
     <div className='Todo'>
       <p>TITLE: {title}</p>
-      <input type="checkbox" checked={isCompleted} />
+      <input type="checkbox" checked={isCompleted} onClick={()=>{
+          props.toggleTodo(_id,!isCompleted) 
+      }}/>
       <span style={{ textDecoration:isCompleted?'line-through':"none" }}>{title}</span>
       <button onClick={()=>{
           props.deleteTodo(_id)
