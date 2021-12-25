@@ -1,3 +1,10 @@
 .App{
-  border: red 5px;
+  border: red , 5px;
+}
+
+.Todo{
+  border: blue , 3px;
+}
+.Add{
+  border: green  , 3px;
 }

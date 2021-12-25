@@ -1,10 +1,12 @@
 const express = require("express")
+const cors = require("cors")
 const app = express()
 
 const db =require("./db")
 const Todo =require("./todo")
 
 app.use(express.json()) //to read body
+app.use(cors()) //to read body
 
 app.get("/",(req,res) => {
     res.json(" GET / is working")
@@ -12,6 +14,7 @@ app.get("/",(req,res) => {
     // CRUD: Creat , Read , Update , Deleted
 })
 app.get("/tasks",(req,res) => {
+    
     Todo.find({}, (err, data) => {
         if (err){
             console.log("ERRor: ",  err )
