@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React,{useState} from 'react'
+import { Link } from 'react-router-dom'
+
 
 
 export default function Register() {
@@ -52,6 +54,8 @@ export default function Register() {
             />
             <br/>
             <input type="submit" value="Register" onClick={(registerFunc)} />
+            
+            <Link to= "/Login">  Have An Account ?</Link>
             </form>
         </div>
     )
